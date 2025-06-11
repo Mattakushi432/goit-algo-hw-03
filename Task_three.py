@@ -3,7 +3,6 @@ import re
 
 def normalize_phone(phone_number):
     for phone in phone_number:
-        # cleaned_number = re.sub(r'\D', '', phone)
         cleaned_number = re.sub(r'[^0-9]', '', phone)
         if not cleaned_number.startswith('+'):
             if cleaned_number.startswith('380'):
