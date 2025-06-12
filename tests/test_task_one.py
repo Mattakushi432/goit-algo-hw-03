@@ -21,7 +21,7 @@ def test_invalid_date_format() -> None:
     assert get_days_from_today("2021/10/09") is None
 
 
-def test_invalid_input()-> None:
+def test_invalid_input() -> None:
     """Test completely invalid input."""
     from Task_one import get_days_from_today
     assert get_days_from_today(3456) is None
