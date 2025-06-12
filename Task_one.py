@@ -1,17 +1,42 @@
-from datetime import datetime
+from datetime import datetime, date
+from typing import Optional
 
+"""
+1. def get_days_from_today(date: str) -> int:
+    он не взвращает инт он возвращает инт или нон
+2. имя переменной date очень плохое. оно совпадает с популярной либой. И очень непонятно что ті хочешь сюда положить
+3. Пиши докстринги (если хочешь правильное оформление)
+4. Если есть желание написать комент лучше вынеси в отдельную функцию
+5. if __name__ == "__main__": крутая штука но для тестов лучше использовать тесты :)
+        например либа Pytest пример скинул
+        
+6. Не используй print для вывода ошибок. Лучше использовать создать и рейзить ексепшн( нот это для больших проектов)
+    здесь можно просто подписать тот который вылетает. 
+    Хотя завист от таски
+7. названия файлов с заглавной буквы не очень хорошая практика. с маленькой буквы снейккейсом
+"""
+def get_days_from_today(date_str: str) -> Optional[int]:
+    """Отримує кількість днів від вказаної дати до поточної дати.
+    Args:
+        date_str (str): Дата у форматі 'PPPP-MM-ДД'.
+    Returns:
+        Optional[int]: Кількість днів від вказаної дати до поточної дати, або None у випадку помилки.
 
-def get_days_from_today(date: str) -> int:
+    """
     try:
-        format_date = datetime.strptime(date, '%Y-%m-%d')
-    except ValueError:
-        print(f"Помилка: Неправильний формат дати '{date}'. Очікується 'PPPP-MM-ДД'")
-        return None
+        format_date = datetime.strptime(date_str, '%Y-%m-%d')
+    except ValueError as e:
+        # raise ValueError(f"Помилка: Неправильний формат дати '{date_str}'. Очікується 'PPPP-MM-ДД'") from e
+        print(f"Помилка: Неправильний формат дати '{date_str}'. Очікується 'PPPP-MM-ДД'")
+        return
 
     # Отримання поточної дати без врахування часу!
-    current_date = datetime.today().replace(hour=0, minute=0, second=0, microsecond=0)
-    time_difference = current_date - format_date
-    return time_difference.days
+    current_date = datetime.today().replace(hour=0, minute=0, second=0, microsecond=0) # Круто. Но есть более короткий способ
+    # используй date вместо datetime
+    today = date.today()
+    input_date = format_date.date()  # Преобразование datetime в date
+    # time_difference = current_date - format_date
+    return (today - input_date).days
 
 
 if __name__ == "__main__":
@@ -43,9 +68,9 @@ if __name__ == "__main__":
     if days5 is not None:
         print(f"Кількість днів від {date5} до сьогодны: {days5}")
 
-"""Перевірка та обробка винятків!"""
-date_invalid = "2023/12/31"
-get_days_from_today(date_invalid)
+    """Перевірка та обробка винятків!"""
+    date_invalid = "2023/12/31"
+    get_days_from_today(date_invalid)
 
-date_another_invalid = "abc-def-ghi"
-get_days_from_today(date_another_invalid)
+    date_another_invalid = "abc-def-ghi"
+    get_days_from_today(date_another_invalid)
