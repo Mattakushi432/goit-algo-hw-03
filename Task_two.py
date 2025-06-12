@@ -1,13 +1,13 @@
 import random
 
 
-def get_numbers_ticket(max_num: int, min_num: int, quantity: int) -> list[int]:
-    if not (1 <= min_num <= max_num <= 1000 and 0 < quantity <= (max_num - min_num + 1)):
+def get_numbers_ticket(max: int, min: int, quantity: int) -> list[int]:
+    if not (1 <= min <= max <= 1000 and 0 < quantity <= (max - min + 1)):
         return []
 
     numbers = set()
     while len(numbers) < quantity:
-        numbers.add(random.randint(min_num, max_num))
+        numbers.add(random.randint(min, max))
 
     return sorted(list(numbers))
 
